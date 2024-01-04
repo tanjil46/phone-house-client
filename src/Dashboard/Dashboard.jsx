@@ -2,7 +2,7 @@ import { Sidebar } from "flowbite-react";
 import {  HiChartPie, HiInbox, HiShoppingBag, HiUser, HiViewBoards } from "react-icons/hi";
 import { CgProfile } from "react-icons/cg";
 import useCart from "../Hooks/useCart";
-import { FaHistory, FaHome} from "react-icons/fa";
+import { FaHistory, FaHome, FaReply} from "react-icons/fa";
 import { FaMessage } from "react-icons/fa6"
 import { Link, NavLink, Outlet } from "react-router-dom";
 import logo from '../img/phone-shop-logo-design-template-gadget-135331058.jpg'
@@ -45,6 +45,13 @@ const{data:messages=[]}=useQuery({
 
 
 
+const{data:replays=[]}=useQuery({
+  queryKey:['replays'],
+  queryFn:async()=>{
+    const res=await normalAxios.get('/replay')
+    return res.data
+  }
+})
 
 
 
@@ -71,7 +78,15 @@ const{data:messages=[]}=useQuery({
                 
                  </Sidebar.Item>
                  <Sidebar.Item href="#" icon={HiInbox} label={messages?.length}>
-                   Inbox
+                 <NavLink
+  to='/dashboard/inbox'
+  className={({ isActive, isPending }) =>
+    isPending ? "pending" : isActive ? "bg-yellow-500 p-2 font bold rounded-xl text-white" : ""
+  }
+>
+  Inbox
+</NavLink>
+            
                  </Sidebar.Item>
                  <Sidebar.Item href="#" icon={HiUser}>
                  <NavLink
@@ -128,7 +143,7 @@ const{data:messages=[]}=useQuery({
                  <Sidebar.Item href="#" icon={FaHistory}>
                   Payment History
                  </Sidebar.Item>
-                 <Sidebar.Item href="#" icon={FaMessage}>
+                 <Sidebar.Item href="#" icon={FaMessage} >
                  
                  <NavLink
   to='/dashboard/message'
@@ -140,6 +155,28 @@ const{data:messages=[]}=useQuery({
 </NavLink>
                  </Sidebar.Item>
                 
+
+
+
+
+
+                 <Sidebar.Item href="#" icon={FaReply} >
+                 
+                 <NavLink
+  to='/dashboard/adminReplay'
+  className={({ isActive, isPending }) =>
+    isPending ? "pending" : isActive ? "bg-yellow-500 p-2 font bold rounded-xl text-white" : ""
+  }
+>
+ Admin Replay
+</NavLink>
+                 </Sidebar.Item>
+                
+
+
+
+
+
                </Sidebar.ItemGroup>
              </Sidebar.Items>
            </Sidebar>

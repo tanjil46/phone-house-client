@@ -21,6 +21,9 @@ import Message from './Dashboard/UserBoard/Message'
 import Addproduct from './Dashboard/AdminBoard/Addproduct'
 import Alluser from './Dashboard/AdminBoard/Alluser'
 import Update from './Dashboard/AdminBoard/Update'
+import Inbox from './Dashboard/AdminBoard/Inbox'
+import Replay from './Dashboard/AdminBoard/Replay'
+import Allreplay from './Dashboard/UserBoard/Allreplay'
 
 
 
@@ -74,6 +77,10 @@ const router=createBrowserRouter([
       path:'message',
       element:<Message></Message>
      },
+     {
+      path:'adminReplay',
+      element:<Allreplay></Allreplay>
+     },
 
                     // ADMIN ROUTE
 
@@ -85,7 +92,14 @@ const router=createBrowserRouter([
       path:'users',
       element:<Alluser></Alluser>
     },
-    
+    {
+      path:'inbox',
+      element:<Inbox></Inbox>
+    },
+    {
+      path:'replay/:messengerEmail',
+      element:<Replay></Replay>
+    }
 
 
 

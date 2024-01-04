@@ -15,8 +15,9 @@ const messagerName=e.target.name.value
 const messengerEmail=e.target.email.value 
 const message=e.target.message.value
 const dateTime=e.target.date.value
+const userImage=user?.photoURL
 const messageInfo={
-    messagerName,messengerEmail,message,dateTime
+    messagerName,messengerEmail,message,dateTime,userImage
 }
 
 normalAxios.post('/message',messageInfo)
