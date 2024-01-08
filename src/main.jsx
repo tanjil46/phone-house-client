@@ -24,6 +24,11 @@ import Update from './Dashboard/AdminBoard/Update'
 import Inbox from './Dashboard/AdminBoard/Inbox'
 import Replay from './Dashboard/AdminBoard/Replay'
 import Allreplay from './Dashboard/UserBoard/Allreplay'
+import Payment from './Dashboard/UserBoard/Payment/Payment'
+import PaymentHistory from './Dashboard/UserBoard/Payment/PaymentHistory'
+import AdminDashboard from './Dashboard/AdminBoard/AdminDashboard'
+import Userprofile from './Dashboard/UserBoard/Userprofile'
+import UserPrivateRoute from './General Components/PrivateRoute/UserPrivateRoute'
 
 
 
@@ -52,7 +57,7 @@ const router=createBrowserRouter([
     },
     {
       path:'/detail/:id',
-      element:<Details></Details>
+      element:<UserPrivateRoute><Details></Details></UserPrivateRoute>
     },
     {
       path:'/update/:id',
@@ -63,7 +68,7 @@ const router=createBrowserRouter([
 },
 {
   path:'dashboard',
-  element:<Dashboard></Dashboard>,
+  element:<UserPrivateRoute><Dashboard></Dashboard></UserPrivateRoute>,
   children:[
     
             //  USER ROUTE
@@ -80,6 +85,19 @@ const router=createBrowserRouter([
      {
       path:'adminReplay',
       element:<Allreplay></Allreplay>
+     },
+     {
+      path:'payment',
+      element:<Payment></Payment>
+     },
+     {
+        path:'history',
+        element:<PaymentHistory></PaymentHistory>
+
+     },
+     {
+      path:'profile',
+      element:<Userprofile></Userprofile>
      },
 
                     // ADMIN ROUTE
@@ -99,6 +117,10 @@ const router=createBrowserRouter([
     {
       path:'replay/:messengerEmail',
       element:<Replay></Replay>
+    },
+    {
+      path:'admin',
+      element:<AdminDashboard></AdminDashboard>
     }
 
 

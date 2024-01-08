@@ -67,7 +67,7 @@ if(response.data.insertedId){
         <div>
             <Title heading={'Hello Admin'} subHeading={'Add Some New Mobile'}></Title>
             <div className="">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} className="mx-6">
       
       <div className="flex gap-4">
 

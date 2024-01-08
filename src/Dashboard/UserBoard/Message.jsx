@@ -41,7 +41,7 @@ normalAxios.post('/message',messageInfo)
 
     return (
         <div>
-            <Title heading={'Need Help!'} subHeading={'Meesage Us'}></Title>
+            <Title  heading={'Need Help!'} subHeading={'Meesage Us'}></Title>
            <div className="my-4">
            <form  onSubmit={formHandler} className="max-w-3xl mx-auto my-12">
 

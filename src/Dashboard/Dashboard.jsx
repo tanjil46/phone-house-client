@@ -1,5 +1,5 @@
 import { Sidebar } from "flowbite-react";
-import {  HiChartPie, HiInbox, HiShoppingBag, HiUser, HiViewBoards } from "react-icons/hi";
+import {  HiChartPie, HiInbox, HiShoppingBag, HiUser } from "react-icons/hi";
 import { CgProfile } from "react-icons/cg";
 import useCart from "../Hooks/useCart";
 import { FaHistory, FaHome, FaReply} from "react-icons/fa";
@@ -62,8 +62,8 @@ const{data:replays=[]}=useQuery({
     return (
         <div>
            
-            <div className="grid grid-cols-12 ">
-          <div className="col-span-3 ">
+            <div className="md:grid md:grid-cols-12 flex flex-col items-center justify-center">
+          <div className="md:col-span-3  ">
           <div className="">
               <img className="w-[180px]" src={logo}></img>
             </div>
@@ -72,11 +72,17 @@ const{data:replays=[]}=useQuery({
              <Sidebar.Items>
                <Sidebar.ItemGroup>
                  <Sidebar.Item href="#" icon={HiChartPie}>
-                   Dashboard
+                 <NavLink
+  to='/dashboard/admin'
+  className={({ isActive, isPending }) =>
+    isPending ? "pending" : isActive ? "bg-yellow-500 p-2 font bold rounded-xl text-white" : ""
+  }
+>
+  Dashboard
+</NavLink>
+            
                  </Sidebar.Item>
-                 <Sidebar.Item href="#" icon={HiViewBoards}>
-                
-                 </Sidebar.Item>
+                 
                  <Sidebar.Item href="#" icon={HiInbox} label={messages?.length}>
                  <NavLink
   to='/dashboard/inbox'
@@ -118,9 +124,9 @@ const{data:replays=[]}=useQuery({
                  <Sidebar.Item href="#" icon={CgProfile}>
                 
 <NavLink
-  to="/messages"
+  to="/dashboard/profile"
   className={({ isActive, isPending }) =>
-    isPending ? "pending" : isActive ? "active" : ""
+    isPending ? "pending" : isActive ? "bg-yellow-500 p-2 font bold rounded-xl text-white" : ""
   }
 >
   Profile
@@ -141,7 +147,14 @@ const{data:replays=[]}=useQuery({
                    
                  </Sidebar.Item>
                  <Sidebar.Item href="#" icon={FaHistory}>
-                  Payment History
+                 <NavLink
+  to='/dashboard/history'
+  className={({ isActive, isPending }) =>
+    isPending ? "pending" : isActive ? "bg-yellow-500 p-2 font bold rounded-xl text-white" : ""
+  }
+>
+ Payment History
+</NavLink>
                  </Sidebar.Item>
                  <Sidebar.Item href="#" icon={FaMessage} >
                  
@@ -160,7 +173,7 @@ const{data:replays=[]}=useQuery({
 
 
 
-                 <Sidebar.Item href="#" icon={FaReply} >
+                 <Sidebar.Item href="#" icon={FaReply} label={replays?.length} >
                  
                  <NavLink
   to='/dashboard/adminReplay'
@@ -185,11 +198,11 @@ const{data:replays=[]}=useQuery({
 
           } 
           
-            <Link className="flex items-center text-2xl" to='/'><FaHome></FaHome><p>Home</p></Link>
+            <Link className="flex items-center my-4 text-2xl " to='/'><FaHome></FaHome><p>Home</p></Link>
          
           </div>
          
-          <div className="col-span-9">
+          <div className="md:col-span-9">
             <Outlet></Outlet>
           </div>
           </div>

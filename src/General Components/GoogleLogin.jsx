@@ -1,15 +1,16 @@
 import { Button } from "flowbite-react";
 import { FaGoogle } from "react-icons/fa";
 import useAuth from "../Hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useNormalAxios from "../Hooks/useNormalAxios";
 
 const GoogleLogin = () => {
 
 
-
+     const location=useLocation()
+     const navigate=useNavigate()
     const{googleLogIn}=useAuth()
-    const navigate=useNavigate()
+   
     const normalAxios=useNormalAxios()
         const googleLogInHanler=()=>{
     
@@ -28,7 +29,7 @@ const GoogleLogin = () => {
             })
     
     
-    navigate('/')
+            navigate(location?.state?location.state:'/')
     
     
             })

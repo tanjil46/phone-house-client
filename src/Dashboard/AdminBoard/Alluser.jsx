@@ -68,7 +68,7 @@ normalAxios.patch(`/users/admin/${user?._id}`)
           <li className="py-3 sm:py-4">
             <div className="flex items-center space-x-4">
               <div className="shrink-0">
-                <img className="w-[90px] h-[70px] rounded-xl" src={user?.photo}></img>
+                <img className="md:w-[90px] w-[40px] md:h-[70px] rounded-xl" src={user?.photo}></img>
               </div>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-medium text-gray-900 dark:text-white">{user?.name}</p>

@@ -1,17 +1,28 @@
-import { Button, Navbar } from 'flowbite-react';
+import { Button,  Navbar } from 'flowbite-react';
 import { Link } from 'react-router-dom';
 import phoneLogo from '../img/phone-shop-logo-design-template-gadget-135331058.jpg'
 import useAuth from '../Hooks/useAuth';
-import toast, { Toaster } from 'react-hot-toast';
+import { FaShoppingCart } from "react-icons/fa";
 import useCart from '../Hooks/useCart';
-
+import { useQuery } from '@tanstack/react-query';
+import useNormalAxios from '../Hooks/useNormalAxios';
+import { IoIosLogOut } from "react-icons/io";
+import Swal from 'sweetalert2';
 const Header = () => {
   const auth=useAuth()
   const{user,userLogOut}=auth
-
+  const normalAxios=useNormalAxios()
 const [carts]=useCart()
 
-console.log(carts)
+
+const{data:admins=[]}=useQuery({
+  queryKey:['admin',user?.email],
+  queryFn:async()=>{
+    const res=await normalAxios.get(`/users/admin/${user?.email}`)
+    return res.data
+  }
+})
+
 
 
 
@@ -21,7 +32,11 @@ console.log(carts)
  const logOut=()=>{
   userLogOut()
   .then(()=>{
-toast.success('Successfully LogOut')
+Swal.fire(
+  'success',
+  'Successfully LogOut ',
+  'success'
+)
   })
   .catch(error=>console.log(error.message))
  }
@@ -39,31 +54,51 @@ toast.success('Successfully LogOut')
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse >
-        <div className="flex items-center gap-4">
-        <Link >Home</Link>
-        <Link to='/collection'>Collections</Link>
-        <button className="btn">
-  My Cart
+        <div className="flex md:flex-row text-center flex-col items-center gap-4">
+        <Link className='hover:border-b-2 hover:border-yellow-500' to='/' >Home</Link>
+        <Link  className='hover:border-b-2 hover:border-yellow-500' to='/collection'>Collections</Link>
+        <div className="indicator">
+  <span className="indicator-item badge badge-secondary">{carts?.length}+</span> 
+  <button className="text-xl btn"><FaShoppingCart></FaShoppingCart></button>
+</div>
+
   
-  <div className="badge badge-secondary">+{carts?.length}</div>
-</button>
-    
-    <Link to='/dashboard'>Dashbaord</Link>
-    
-    <Link  >Contact Us</Link>
+   
     
 {
-  user?
-  <Button onClick={logOut} gradientDuoTone="greenToBlue">SING OUT</Button>:<Link to='/login'>  <Button  gradientMonochrome="pink">Sign In</Button>
+  user?'':<Link to='/login'>  <Button  gradientMonochrome="pink">Sign In</Button>
   </Link>
 }
-<Toaster/>
+ 
+
+
 {
-  user? <div className="avatar online placeholder">
+  user? <div className="dropdown">
+  <div tabIndex={0} role="button" className=" m-1"><div className="avatar online placeholder">
   <div className="bg-neutral text-neutral-content rounded-full w-16">
     <img src={user?.photoURL}></img>
   </div>
-</div> 
+</div></div>
+  <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 space-y-4 shadow bg-slate-500 rounded-box w-52">
+    
+
+  {
+      admins.admin===true? <Link className='font-bold  text-white' to='/dashboard/admin'>Dashbaord</Link>:<Link fclassName='font-bold  text-white' to='/dashboard/profile'>Dashbaord</Link>
+    }
+   
+ 
+  <button className='text-3xl mx-auto hover:bg-white hover:p-2 hover:rounded-md' onClick={logOut}>
+ <IoIosLogOut></IoIosLogOut>
+
+  </button>
+   
+ 
+   
+  </ul>
+</div>
+  
+  
+  
 :''}
 
         </div>
@@ -74,3 +109,4 @@ toast.success('Successfully LogOut')
 };
 
 export default Header;
+

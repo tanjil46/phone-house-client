@@ -1,7 +1,7 @@
 
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import backImage from '../img/phone back.jpg'
+
 import useNormalAxios from "../Hooks/useNormalAxios";
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
@@ -106,30 +106,31 @@ if(res.data.insertedId){
 
 
     }
-    const backGroundImage={
-        backgroundImage:`url(${backImage})`,
-        backgroundSize:'90%'
-      
-     
-}
-      
+    
       
       
 
     return (
         <div className='flex  w-full my-12'>
             
-   <div className="w-[50%] bg-white m-5" >
+   <div className="w-[50%] bg-white m-5">
 
-<div className="bg-contain" style={backGroundImage} >
-
-
+<div className="bg-gradient-to-t from-pink-500 to-fuchsia-500 h-screen" >
 
 
 
- <h1 className="text-5xl text-red-700">LIVING LIFE
-     ON THE EDGE</h1> 
 
+<div className="text-center space-y-5 py-10">
+ <h1 className="text-5xl text-cyan-500">LIVING</h1> 
+ <h1 className="text-5xl text-green-500">LIFE</h1> 
+ <h1 className="text-5xl text-yellow-500">ON THE </h1> 
+ <h1 className="text-5xl text-teal-500">EDGE</h1> 
+ </div>
+ 
+ 
+ 
+ 
+ 
 
 
 </div>

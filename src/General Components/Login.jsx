@@ -6,13 +6,14 @@ import realme from '../img/realme-c53-1.jpg'
 import xaomi from '../img/Xiaomi-Redmi-Note-10-5G-Nighttime-Blue.jpg'
 import galaxy from '../img/samsung-galaxy-note-10-plus.jpg' 
 import poco from '../img/Xiaomi-Poco-F3-Deep-Ocean-Blue.jpg'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth';
 import GoogleLogin from './GoogleLogin';
 import Swal from 'sweetalert2';
 const Login = () => {
     const { register, handleSubmit,reset } = useForm()
-   
+   const location=useLocation()
+   const navigate=useNavigate()
     const auth=useAuth()
     const{userSingIn}=auth
  const onSubmit=async(data)=>{
@@ -30,6 +31,8 @@ const Login = () => {
     showConfirmButton: false,
     timer: 1500
   });
+  navigate(location?.state?location.state:'/')
+
  })
 .catch(error=>{
   console.log(error.message)
